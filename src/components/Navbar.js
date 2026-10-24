@@ -34,6 +34,14 @@ export default function Navbar() {
       <div className="flex items-center gap-4">
         {user ? (
           <>
+            {user.role === "company" && (
+              <Link
+                href="/post-job"
+                className="text-sm text-blue-600 hover:underline"
+              >
+                Post a job
+              </Link>
+            )}
             <span className="text-sm text-gray-700">
               {user.name} ({user.role})
             </span>
@@ -44,16 +52,16 @@ export default function Navbar() {
               Logout
             </button>
           </>
-       ) : (
-  <>
-    <Link href="/login" className="text-sm text-blue-600 hover:underline">
-      Login
-    </Link>
-    <Link href="/register" className="text-sm text-blue-600 hover:underline">
-      Register
-    </Link>
-  </>
-)}
+        ) : (
+          <>
+            <Link href="/login" className="text-sm text-blue-600 hover:underline">
+              Login
+            </Link>
+            <Link href="/register" className="text-sm text-blue-600 hover:underline">
+              Register
+            </Link>
+          </>
+        )}
       </div>
     </nav>
   );
