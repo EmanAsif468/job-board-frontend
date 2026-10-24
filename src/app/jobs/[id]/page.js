@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ApplyForm from "../../../components/ApplyForm";
-
+import ApplicationsList from "../../../components/ApplicationsList";
 const API_URL = "http://localhost:3000";
 
 async function getJob(id) {
@@ -40,6 +40,7 @@ export default async function JobDetailPage({ params }) {
       </div>
 
       <ApplyForm jobId={job.id} />
+      <ApplicationsList jobId={job.id} />
     </main>
   );
 }
