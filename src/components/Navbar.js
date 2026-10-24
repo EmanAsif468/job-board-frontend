@@ -44,11 +44,16 @@ export default function Navbar() {
               Logout
             </button>
           </>
-        ) : (
-          <Link href="/login" className="text-sm text-blue-600 hover:underline">
-            Login
-          </Link>
-        )}
+       ) : (
+  <>
+    <Link href="/login" className="text-sm text-blue-600 hover:underline">
+      Login
+    </Link>
+    <Link href="/register" className="text-sm text-blue-600 hover:underline">
+      Register
+    </Link>
+  </>
+)}
       </div>
     </nav>
   );
