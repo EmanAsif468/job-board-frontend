@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ApplyForm from "../../../components/ApplyForm";
 
 const API_URL = "http://localhost:3000";
 
@@ -37,6 +38,8 @@ export default async function JobDetailPage({ params }) {
           Posted on {new Date(job.created_at).toLocaleDateString()}
         </p>
       </div>
+
+      <ApplyForm jobId={job.id} />
     </main>
   );
 }
