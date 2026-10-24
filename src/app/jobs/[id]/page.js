@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ApplyForm from "../../../components/ApplyForm";
 import ApplicationsList from "../../../components/ApplicationsList";
-const API_URL = "http://localhost:3000";
+import { API_URL } from "@/lib/config";
 
 async function getJob(id) {
   const res = await fetch(`${API_URL}/jobs/${id}`, { cache: "no-store" });

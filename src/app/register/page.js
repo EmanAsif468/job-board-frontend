@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const API_URL = "http://localhost:3000";
+import { API_URL } from "@/lib/config";
 
 export default function RegisterPage() {
   const router = useRouter();

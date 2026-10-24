@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const API_URL = "http://localhost:3000";
+import { API_URL } from "@/lib/config";
 
 async function getJobs() {
   const res = await fetch(`${API_URL}/jobs`, { cache: "no-store" });

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-const API_URL = "http://localhost:3000";
+import { API_URL } from "@/lib/config";
 
 export default function PostJobPage() {
   const router = useRouter();

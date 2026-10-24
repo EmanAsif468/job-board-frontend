@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const API_URL = "http://localhost:3000";
+import { API_URL } from "@/lib/config";
 
 export default function ApplyForm({ jobId }) {
   const [user, setUser] = useState(null);
