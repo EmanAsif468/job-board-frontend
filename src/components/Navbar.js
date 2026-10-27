@@ -26,42 +26,60 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="flex items-center justify-between border-b border-gray-200 bg-white px-8 py-4">
-      <Link href="/" className="text-lg font-bold text-gray-900">
-        Job Board
-      </Link>
+    <nav className="sticky top-0 z-10 border-b border-gray-200 bg-white">
+      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-6 py-3">
+        <Link href="/" className="text-lg font-bold text-gray-900">
+          Job Board
+        </Link>
 
-      <div className="flex items-center gap-4">
-        {user ? (
-          <>
-            {user.role === "company" && (
-              <Link
-                href="/post-job"
-                className="text-sm text-blue-600 hover:underline"
+        <div className="flex flex-wrap items-center gap-3">
+          {user ? (
+            <>
+              {user.role === "company" && (
+                <Link
+                  href="/post-job"
+                  className="rounded bg-blue-600 px-3 py-1.5 text-sm text-white hover:bg-blue-700"
+                >
+                  Post a job
+                </Link>
+              )}
+
+              <span className="text-sm text-gray-700">{user.name}</span>
+
+              <span
+                className={`rounded-full px-2 py-0.5 text-xs font-medium ${
+                  user.role === "company"
+                    ? "bg-purple-100 text-purple-800"
+                    : "bg-green-100 text-green-800"
+                }`}
               >
-                Post a job
+                {user.role}
+              </span>
+
+              <button
+                onClick={handleLogout}
+                className="rounded border border-gray-300 px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-100"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="px-2 py-1.5 text-sm text-gray-700 hover:underline"
+              >
+                Login
               </Link>
-            )}
-            <span className="text-sm text-gray-700">
-              {user.name} ({user.role})
-            </span>
-            <button
-              onClick={handleLogout}
-              className="rounded bg-gray-100 px-3 py-1 text-sm text-gray-800 hover:bg-gray-200"
-            >
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <Link href="/login" className="text-sm text-blue-600 hover:underline">
-              Login
-            </Link>
-            <Link href="/register" className="text-sm text-blue-600 hover:underline">
-              Register
-            </Link>
-          </>
-        )}
+              <Link
+                href="/register"
+                className="rounded bg-blue-600 px-3 py-1.5 text-sm text-white hover:bg-blue-700"
+              >
+                Register
+              </Link>
+            </>
+          )}
+        </div>
       </div>
     </nav>
   );
