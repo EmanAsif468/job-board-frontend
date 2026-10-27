@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ApplyForm from "../../../components/ApplyForm";
 import ApplicationsList from "../../../components/ApplicationsList";
+import OwnerActions from "../../../components/OwnerActions";
 import { API_URL } from "@/lib/config";
 
 async function getJob(id) {
@@ -41,6 +42,7 @@ export default async function JobDetailPage({ params }) {
 
       <ApplyForm jobId={job.id} />
       <ApplicationsList jobId={job.id} />
+      <OwnerActions jobId={job.id} ownerId={job.user_id} />
     </main>
   );
-}
+} 
