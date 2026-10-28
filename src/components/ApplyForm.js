@@ -1,11 +1,13 @@
 "use client";
-
+import { useRouter } from "next/navigation";
+import { clearSession } from "@/lib/auth";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { API_URL } from "@/lib/config";
 
 export default function ApplyForm({ jobId }) {
+    const router = useRouter();
   const [user, setUser] = useState(null);
   const [ready, setReady] = useState(false);
   const [message, setMessage] = useState("");
@@ -43,7 +45,11 @@ export default function ApplyForm({ jobId }) {
           message,
         }),
       });
-
+            if (res.status === 401) {
+        clearSession();
+        router.push("/login");
+        return;
+      }
       const data = await res.json();
 
       if (!res.ok) {

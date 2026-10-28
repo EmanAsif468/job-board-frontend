@@ -1,5 +1,5 @@
 "use client";
-
+import { clearSession } from "@/lib/auth";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -47,6 +47,11 @@ export default function PostJobPage() {
         },
         body: JSON.stringify({ title, company, location, type }),
       });
+            if (res.status === 401) {
+        clearSession();
+        router.push("/login");
+        return;
+      }
 
       const data = await res.json();
 
