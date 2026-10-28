@@ -33,3 +33,4 @@ A job board where companies post jobs and candidates apply. This is the Next.js 
 ## Author
 
 Built by EmanAsif468 while learning full-stack development.
+https://job-board-frontend-weld.vercel.app
