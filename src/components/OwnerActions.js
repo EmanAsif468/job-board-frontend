@@ -1,5 +1,5 @@
 "use client";
-
+import { clearSession } from "@/lib/auth";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { API_URL } from "@/lib/config";
@@ -41,14 +41,18 @@ export default function OwnerActions({ jobId, ownerId }) {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
+            const data = await res.json();
 
-      const data = await res.json();
+      if (res.status === 401) {
+        clearSession();
+        router.push("/login");
+        return;
+      }
 
       if (!res.ok) {
         setError(data.message || "Could not delete job");
         return;
       }
-
       router.push("/");
       router.refresh();
     } catch (err) {
