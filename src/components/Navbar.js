@@ -62,8 +62,17 @@ export default function Navbar() {
                     : "bg-green-100 text-green-800"
                 }`}
               >
+
                 {user.role}
               </span>
+                            {user.role === "candidate" && (
+                <Link
+                  href="/my-applications"
+                  className="px-2 py-1.5 text-sm text-gray-700 hover:underline"
+                >
+                  My applications
+                </Link>
+              )}
 
               <button
                 onClick={handleLogout}
