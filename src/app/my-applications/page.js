@@ -92,12 +92,12 @@ export default function MyApplicationsPage() {
         ) : (
           <ul className="mt-6 space-y-3">
             {apps.map((app) => (
-              <li key={app.id}>
-                <Link
-                  href={`/jobs/${app.job_id}`}
-                  className="flex items-center justify-between gap-4 rounded-lg border border-gray-200 bg-white p-4 hover:border-blue-300"
-                >
-                  <div className="min-w-0">
+              <li
+                key={app.id}
+                className="rounded-lg border border-gray-200 bg-white p-4"
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <Link href={`/jobs/${app.job_id}`} className="min-w-0 hover:underline">
                     <p className="truncate font-semibold text-gray-900">
                       {app.title}
                     </p>
@@ -105,7 +105,8 @@ export default function MyApplicationsPage() {
                     <p className="text-sm text-gray-500">
                       {app.location} | {app.type}
                     </p>
-                  </div>
+                  </Link>
+
                   <div className="shrink-0 text-right">
                     <span className="rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-800">
                       Applied
@@ -114,7 +115,18 @@ export default function MyApplicationsPage() {
                       {new Date(app.created_at).toLocaleDateString()}
                     </p>
                   </div>
-                </Link>
+                </div>
+
+                {app.resume_url && (
+                  <a
+                    href={app.resume_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-block text-sm text-blue-600 hover:underline"
+                  >
+                    View resume
+                  </a>
+                )}
               </li>
             ))}
           </ul>
