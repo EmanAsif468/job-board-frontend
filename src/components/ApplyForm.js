@@ -1,16 +1,17 @@
 "use client";
+
 import { useRouter } from "next/navigation";
 import { clearSession } from "@/lib/auth";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-
 import { API_URL } from "@/lib/config";
 
 export default function ApplyForm({ jobId }) {
-    const router = useRouter();
+  const router = useRouter();
   const [user, setUser] = useState(null);
   const [ready, setReady] = useState(false);
   const [message, setMessage] = useState("");
+  const [resume, setResume] = useState(null);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -33,23 +34,29 @@ export default function ApplyForm({ jobId }) {
     try {
       const token = localStorage.getItem("token");
 
+      const formData = new FormData();
+      formData.append("applicant_name", user.name);
+      formData.append("applicant_email", user.email);
+      formData.append("message", message);
+
+      if (resume) {
+        formData.append("resume", resume);
+      }
+
       const res = await fetch(`${API_URL}/jobs/${jobId}/applications`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          applicant_name: user.name,
-          applicant_email: user.email,
-          message,
-        }),
+        body: formData,
       });
-            if (res.status === 401) {
+
+      if (res.status === 401) {
         clearSession();
         router.push("/login");
         return;
       }
+
       const data = await res.json();
 
       if (!res.ok) {
@@ -110,6 +117,18 @@ export default function ApplyForm({ jobId }) {
         rows={4}
         className="w-full rounded border border-gray-300 p-2 text-gray-900"
       />
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700">
+          Resume (PDF or Word, optional, max 5 MB)
+        </label>
+        <input
+          type="file"
+          accept=".pdf,.doc"
+          onChange={(e) => setResume(e.target.files[0] || null)}
+          className="mt-1 block w-full text-sm text-gray-700"
+        />
+      </div>
 
       {error && <p className="text-sm text-red-600">{error}</p>}
 
