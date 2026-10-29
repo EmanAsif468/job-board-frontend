@@ -34,3 +34,7 @@ A job board where companies post jobs and candidates apply. This is the Next.js 
 
 Built by EmanAsif468 while learning full-stack development.
 https://job-board-frontend-weld.vercel.app
+- Company dashboard with applicant counts per job
+- Candidate "My applications" page
+- Job search and filter by location and type
+- Auto logout when the session token expires
